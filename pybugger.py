@@ -18,12 +18,12 @@ for i in xrange(len(lines)):
 
 # generate identifiers
 alphabet = string.ascii_lowercase
+
+# initialize stack
 debug_string = ""       # current location in stack
 debug_alph = dict()     # index of next char to use
 debug_num = dict()      # number associated with each location in stack
 debug_alph[""] = 0
-debug_num[""] = 0
-
 
 # insert printf statements after '{'
 for i in xrange(len(lines)):
