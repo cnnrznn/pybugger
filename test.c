@@ -4,9 +4,9 @@
 
 int main()
 {
-    long n = 1000;
     long tmp = 0;
     long sum = 0;
+    int i;
 
     // comment #1
     while (tmp < 10) {
@@ -29,6 +29,11 @@ int main()
         default:
             tmp *= 100;
             break;
+    }
+
+    for (i=0; i<tmp; i++) {
+        // do stuff
+        // compute things
     }
 
     return 0;
