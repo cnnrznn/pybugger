@@ -25,7 +25,7 @@ debug_alph = dict()     # index of next char to use
 debug_num = dict()      # number associated with each location in stack
 debug_alph[""] = 0
 
-# insert printf statements after '{'
+# insert printf statements
 for i in xrange(len(lines)):
     if lines[i].find('{') > -1:
         debug_string += alphabet[debug_alph[debug_string]]
