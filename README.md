@@ -11,3 +11,9 @@ and insert debugging statements at the beginning of
 all functions and branching statements. Later, one
 can use the unique print statements to pinpoint the line
 of failure in the code.
+
+This is not meant to replace tools like gdb. It is meant
+to be used to quickly locate lines that may be causing errors.
+If code is written such that similar data types are created
+and destroyed in similar ways, this tool will make it easy
+to determine which allocation/deallocation is causing the error.
