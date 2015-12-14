@@ -7,6 +7,17 @@
 import sys
 import string
 
+#################
+### FUNCTIONS ###
+#################
+
+def create_print(string, num):
+    return "printf(\"" + string + str(num) + "\\n\");"
+
+##############
+### SCRIPT ###
+##############
+
 # open and read lines of code file
 inf = open(sys.argv[1])
 lines = inf.readlines()
@@ -33,7 +44,7 @@ for i in xrange(len(lines)):
         debug_alph[debug_string] = 0
         debug_num[debug_string] = 0
         print lines[i][:index] + \
-                debug_string + "_" + str(debug_num[debug_string]) + \
+                create_print(debug_string, debug_num[debug_string]) + \
                 lines[i][index:]
     elif lines[i].find('}') > -1:
         index = lines[i].find('}') + 1
@@ -42,7 +53,9 @@ for i in xrange(len(lines)):
             debug_alph[debug_string] += 1
             debug_num[debug_string] += 1
             print lines[i][:index] + \
-                    debug_string + "_" + str(debug_num[debug_string]) + \
+                    create_print(debug_string, debug_num[debug_string]) + \
                     lines[i][index:]
+        else:
+            print lines[i]
     else:
         print lines[i]
