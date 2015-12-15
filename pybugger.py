@@ -14,30 +14,12 @@ import string
 def create_print(string, num):
     return "printf(\"" + string + str(num) + "\\n\");"
 
-##############
-### SCRIPT ###
-##############
+def if_not_switch(lines, i):
+    global debug_string
+    global debug_alph
+    global debug_num
+    global alphabet
 
-# open and read lines of code file
-inf = open(sys.argv[1])
-lines = inf.readlines()
-inf.close()
-
-# pre-process file
-for i in xrange(len(lines)):
-    lines[i] = lines[i].strip('\n')
-
-# generate identifiers
-alphabet = string.ascii_lowercase
-
-# initialize stack
-debug_string = ""       # current location in stack
-debug_alph = dict()     # index of next char to use
-debug_num = dict()      # number associated with each location in stack
-debug_alph[""] = 0
-
-# insert printf statements
-for i in xrange(len(lines)):
     if lines[i].find('{') > -1:
         index = lines[i].find('{') + 1
         debug_string += alphabet[debug_alph[debug_string]]
@@ -59,3 +41,33 @@ for i in xrange(len(lines)):
             print lines[i]
     else:
         print lines[i]
+
+##############
+### SCRIPT ###
+##############
+
+# miscellaneous variables
+mode = 0 #main
+
+# open and read lines of code file
+inf = open(sys.argv[1])
+lines = inf.readlines()
+inf.close()
+
+# pre-process file
+for i in xrange(len(lines)):
+    lines[i] = lines[i].strip('\n')
+
+# generate identifiers
+alphabet = string.ascii_lowercase
+
+# initialize stack
+debug_string = ""       # current location in stack
+debug_alph = dict()     # index of next char to use
+debug_num = dict()      # number associated with each location in stack
+debug_alph[""] = 0
+
+# insert printf statements
+for i in xrange(len(lines)):
+    if mode == 0:
+        if_not_switch(lines, i)
