@@ -19,7 +19,9 @@ def create_print(string, num):
 ##############
 
 # miscellaneous variables
-mode = 0 #main
+_main = 0
+_switch = 1
+mode = _main
 
 # open and read lines of code file
 inf = open(sys.argv[1])
