@@ -23,6 +23,7 @@ def mode_main(lines, i):
     if lines[i].find('{') > -1:
         if "switch" in lines[i]:
             mode = _switch
+            print lines[i]
             return
         index = lines[i].find('{') + 1
         debug_string += alphabet[debug_alph[debug_string]]
