@@ -19,7 +19,11 @@ def mode_main(lines, i):
     global debug_string
     global debug_alph
     global debug_num
+    global mode
     if lines[i].find('{') > -1:
+        if "switch" in lines[i]:
+            mode = _switch
+            return
         index = lines[i].find('{') + 1
         debug_string += alphabet[debug_alph[debug_string]]
         debug_alph[debug_string] = 0
