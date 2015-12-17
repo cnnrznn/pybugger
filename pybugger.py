@@ -14,6 +14,32 @@ import string
 def create_print(string, num):
     return "printf(\"" + string + str(num) + "\\n\");"
 
+def mode_main(lines, i):
+    global debug_string
+    global debug_alph
+    global debug_num
+    if lines[i].find('{') > -1:
+        index = lines[i].find('{') + 1
+        debug_string += alphabet[debug_alph[debug_string]]
+        debug_alph[debug_string] = 0
+        debug_num[debug_string] = 0
+        print lines[i][:index] + \
+                create_print(debug_string, debug_num[debug_string]) + \
+                lines[i][index:]
+    elif lines[i].find('}') > -1:
+        index = lines[i].find('}') + 1
+        debug_string = debug_string[:-1]
+        if debug_string != "":
+            debug_alph[debug_string] += 1
+            debug_num[debug_string] += 1
+            print lines[i][:index] + \
+                    create_print(debug_string, debug_num[debug_string]) + \
+                    lines[i][index:]
+        else:
+            print lines[i]
+    else:
+        print lines[i]
+
 ##############
 ### SCRIPT ###
 ##############
@@ -43,24 +69,5 @@ debug_alph[""] = 0
 
 # insert printf statements
 for i in xrange(len(lines)):
-    if lines[i].find('{') > -1:
-        index = lines[i].find('{') + 1
-        debug_string += alphabet[debug_alph[debug_string]]
-        debug_alph[debug_string] = 0
-        debug_num[debug_string] = 0
-        print lines[i][:index] + \
-                create_print(debug_string, debug_num[debug_string]) + \
-                lines[i][index:]
-    elif lines[i].find('}') > -1:
-        index = lines[i].find('}') + 1
-        debug_string = debug_string[:-1]
-        if debug_string != "":
-            debug_alph[debug_string] += 1
-            debug_num[debug_string] += 1
-            print lines[i][:index] + \
-                    create_print(debug_string, debug_num[debug_string]) + \
-                    lines[i][index:]
-        else:
-            print lines[i]
-    else:
-        print lines[i]
+    if mode == _main:
+        mode_main(lines, i)
