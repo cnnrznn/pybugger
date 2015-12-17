@@ -12,7 +12,8 @@ import string
 #################
 
 def create_print(string, num):
-    return "printf(\"" + string + str(num) + "\\n\");"
+    return "printf(\"" + sys.argv[1] + "_" + \
+            string + str(num) + "\\n\");"
 
 def mode_main(lines, i):
     global debug_string
