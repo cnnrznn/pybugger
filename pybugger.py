@@ -21,14 +21,14 @@ def mode_main(lines, i):
     global debug_num
     global mode
     if lines[i].find('{') > -1:
-        if "switch" in lines[i]:
-            mode = _switch
-            print lines[i]
-            return
         index = lines[i].find('{') + 1
         debug_string += alphabet[debug_alph[debug_string]]
         debug_alph[debug_string] = 0
         debug_num[debug_string] = 0
+        if "switch" in lines[i]:
+            mode = _switch
+            print lines[i]
+            return
         print lines[i][:index] + \
                 create_print(debug_string, debug_num[debug_string]) + \
                 lines[i][index:]
@@ -45,6 +45,20 @@ def mode_main(lines, i):
             print lines[i]
     else:
         print lines[i]
+
+def mode_switch(lines, i):
+    global debug_string
+    global debug_alph
+    global debug_num
+    global mode
+    if "case" in lines[i] or "default" in lines[i]:
+        print lines[i] + create_print(debug_string, debug_num[debug_string])
+        debug_alph[debug_string] += 1
+        debug_num[debug_string] += 1
+    else:
+        print lines[i]
+    if lines[i+1].find('}') > -1:
+        mode = _main
 
 ##############
 ### SCRIPT ###
@@ -77,3 +91,5 @@ debug_alph[""] = 0
 for i in xrange(len(lines)):
     if mode == _main:
         mode_main(lines, i)
+    elif mode == _switch:
+        mode_switch(lines, i)
